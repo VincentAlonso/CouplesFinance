@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {Partner} from "./lib/types.ts"
   import NameInput from "./lib/components/NameInput.svelte";
+  import Intro from "./lib/components/Intro.svelte"
 
   let partners: Partner[] = $state([])
 
@@ -10,22 +11,37 @@
       { id: 'B', name: name2, section_answers: {} },
     ]
   }
+
+  let current_state: number = $state(0)
+
+  function goForward() {
+    current_state += 1
+  }
+
+  function goBackward() {
+    current_state -= 1
+  }
 </script>
 
-
-
 <main>
-  <h1>Welcome to Couples Finance</h1>
-  <div>
-    <p>
-      This is a tool designed to help you live a life together without worrying about money. Would you like to start this journey?
-    </p>
 
-    {#if partners.length === 0}
-      <NameInput onsubmit={createPartners}/>
-    {:else}
-      <p>Welcome {partners[0].name} and {partners[1].name}</p>
-    {/if}
+  {#if current_state === 0}
+    <h1>Welcome to Couples Finance</h1>
+    <div>
+      <p>
+        This is a tool designed to help you live a life together without worrying about money. Would you like to start this journey?
+      </p>
 
-  </div>
+      {#if partners.length === 0}
+        <NameInput onsubmit={createPartners}/>
+      {:else}
+        <p>Welcome {partners[0].name} and {partners[1].name}</p>
+        <button onclick={goForward}>Start</button>
+      {/if}
+    </div>
+  {:else if current_state === 1}
+    <Intro partner1={partners[0]} partner2={partners[1]} onready={goForward}></Intro>
+  {/if}
+
+
 </main>

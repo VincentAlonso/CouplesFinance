@@ -3,7 +3,7 @@ export type PartnerId = 'A' | 'B'
 export interface Partner {
     id: PartnerId; //A | B
     name: string; //partners name
-    section_answers: Record<number, string | number[]>; //section id, answers in question order
+    section_answers: Record<number, (string | number)[]>; //section id, answers in question order
 }
 
 export interface Section {

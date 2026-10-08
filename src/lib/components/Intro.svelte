@@ -13,9 +13,31 @@ their are, and how long the experience will take to complete.
         onready: () => void
     }
 
-    let {partner1, partner2}: Props = $props();
+    let {partner1, partner2, onready}: Props = $props()
+
+    const intro_script: string[] = [
+        "When you think about things you say to each other about money, what springs to mind?",
+        "You spent how much on that!?",
+        "I feel like we don't have a plan, like we're just spending and spending",
+        "It feels like we never have enough money, no matter what we do!",
+        "Or do you just not talk about it at all?",
+        "The goal of these exercises is to give you the tools to not just understand your money, but to feel good about" +
+        " talking about, spending it, and planning for your future together."
+    ]
+
+    let index: number = $state(0)
+    let isLast: boolean = $derived(index === intro_script.length - 1)
+
+    function advance () {
+        if (isLast) {
+            onready()
+        } else {
+        index = index + 1
+            }
+    }
 </script>
 
 <div>
-
+    <p>{intro_script[index]}</p>
+    <button onclick={advance}> {isLast ? "Ready?" : "Next"}</button>
 </div>

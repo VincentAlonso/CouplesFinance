@@ -9,6 +9,7 @@ dist
 
 # Local env overrides
 *.local
+CLAUDE.md
 
 # WebStorm / JetBrains
 .idea/

@@ -12,8 +12,8 @@
 </script>
 
 <div>
-    <input type="text" placeholder="What is your name" bind:value={name1}/>
-    <input type="text" placeholder="And your partners" bind:value={name2}/>
-    <button disabled={!canSubmit} onclick={() => onsubmit(name1, name2)}> Start </button>
+    <input type="text" placeholder="What are" bind:value={name1}/>
+    <input type="text" placeholder="your names?" bind:value={name2}/>
+    <button disabled={!canSubmit} onclick={() => onsubmit(name1, name2)}> Press me </button>
 
 </div>
