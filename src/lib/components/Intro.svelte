@@ -33,7 +33,7 @@ their are, and how long the experience will take to complete.
             onready()
         } else {
         index = index + 1
-            }
+        }
     }
 </script>
 

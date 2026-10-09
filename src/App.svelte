@@ -43,5 +43,4 @@
     <Intro partner1={partners[0]} partner2={partners[1]} onready={goForward}></Intro>
   {/if}
 
-
 </main>
