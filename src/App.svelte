@@ -2,6 +2,7 @@
   import type {Partner} from "./lib/types.ts"
   import NameInput from "./lib/components/NameInput.svelte";
   import Intro from "./lib/components/Intro.svelte"
+  import MoneyMoments from "./lib/components/MoneyMoments.svelte";
 
   let partners: Partner[] = $state([])
 
@@ -21,10 +22,15 @@
   function goBackward() {
     current_state -= 1
   }
+
+  function saveMoneyMoments(partner1_answers: string[], partner2_answers: string[]) {
+    partners[0].section_answers[1] = partner1_answers
+    partners[1].section_answers[1] = partner2_answers
+    goForward()
+  }
 </script>
 
 <main>
-
   {#if current_state === 0}
     <h1>Welcome to Couples Finance</h1>
     <div>
@@ -39,8 +45,14 @@
         <button onclick={goForward}>Start</button>
       {/if}
     </div>
+
   {:else if current_state === 1}
     <Intro partner1={partners[0]} partner2={partners[1]} onready={goForward}></Intro>
-  {/if}
 
+  {:else if current_state === 2}
+    <MoneyMoments partner1={partners[0]} partner2={partners[1]} onsubmit={saveMoneyMoments}></MoneyMoments>
+
+  {:else if current_state === 3 }
+    <div></div>
+  {/if}
 </main>
