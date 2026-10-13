@@ -6,6 +6,7 @@ their are, and how long the experience will take to complete.
 -->
 <script lang="ts">
     import type {Partner} from "../types.ts"
+    import Slides from "./Slides.svelte"
 
     interface Props {
         readonly partner1: Partner
@@ -25,19 +26,6 @@ their are, and how long the experience will take to complete.
         " talking about, spending it, and planning for your future together."
     ]
 
-    let index: number = $state(0)
-    let isLast: boolean = $derived(index === intro_script.length - 1)
-
-    function advance () {
-        if (isLast) {
-            onready()
-        } else {
-        index = index + 1
-        }
-    }
 </script>
 
-<div>
-    <p>{intro_script[index]}</p>
-    <button onclick={advance}> {isLast ? "Ready?" : "Next"}</button>
-</div>
+<Slides script={intro_script} ondone={onready}/>

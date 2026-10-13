@@ -9,6 +9,7 @@ This data will have to persist, so it must be passed back.
 -->
 <script lang="ts">
     import type {Partner} from "../types";
+    import Slides from "./Slides.svelte";
 
     interface Props {
         partner1: Partner
@@ -36,17 +37,6 @@ This data will have to persist, so it must be passed back.
 
     let current_state: number = $state(0)
 
-    let index: number = $state(0)
-    let isLast: boolean = $derived(index === section_script.length - 1)
-
-    function advanceScript() {
-        if (isLast) {
-            current_state += 1
-        } else {
-            index += 1
-        }
-    }
-
     function goForward() {
         current_state += 1
     }
@@ -58,8 +48,7 @@ This data will have to persist, so it must be passed back.
 
 <div>
     {#if current_state === 0} <!-- Intro -->
-        <p>{section_script[index]}</p>
-        <button onclick={advanceScript}> {isLast ? "Ready?" : "Next"}</button>
+        <Slides script={section_script} ondone={goForward}/>
     {:else if current_state === 1} <!-- Partner 1 start -->
         <div class="answers">
             <p>

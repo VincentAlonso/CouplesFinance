@@ -3,6 +3,7 @@
   import NameInput from "./lib/components/NameInput.svelte";
   import Intro from "./lib/components/Intro.svelte"
   import MoneyMoments from "./lib/components/MoneyMoments.svelte";
+  import RichLife from "./lib/components/RichLife.svelte";
 
   let partners: Partner[] = $state([])
 
@@ -28,6 +29,12 @@
     partners[1].section_answers[1] = partner2_answers
     goForward()
   }
+
+  function saveRichLife(partner1_answers: string[], partner2_answers: string[]) {
+    partners[0].section_answers[2] = partner1_answers
+    partners[1].section_answers[2] = partner2_answers
+    goForward()
+  }
 </script>
 
 <main>
@@ -51,8 +58,8 @@
 
   {:else if current_state === 2}
     <MoneyMoments partner1={partners[0]} partner2={partners[1]} onsubmit={saveMoneyMoments}></MoneyMoments>
-
   {:else if current_state === 3 }
-    <div></div>
+    <RichLife partner1={partners[0]} partner2={partners[1]} onsubmit={saveRichLife}></RichLife>
+
   {/if}
 </main>
