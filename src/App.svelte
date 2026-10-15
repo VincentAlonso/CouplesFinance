@@ -58,8 +58,11 @@
 
   {:else if current_state === 2}
     <MoneyMoments partner1={partners[0]} partner2={partners[1]} onsubmit={saveMoneyMoments}></MoneyMoments>
+
   {:else if current_state === 3 }
     <RichLife partner1={partners[0]} partner2={partners[1]} onsubmit={saveRichLife}></RichLife>
+
+  {:else if current_state === 4}
 
   {/if}
 </main>

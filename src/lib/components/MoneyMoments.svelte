@@ -104,7 +104,7 @@ This data will have to persist, so it must be passed back.
             Take turns reading your phrases out loud. Which ones surprised you? Where do you see
             them showing up in how you spend or save today?
         </p>
-        <button onclick={() => onsubmit(partner1_answers, partner2_answers)}>Next</button>
+        <button onclick={() => onsubmit(partner1_answers, partner2_answers)}>Next Section</button>
     {/if}
 </div>
 

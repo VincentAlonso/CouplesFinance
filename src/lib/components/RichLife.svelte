@@ -44,8 +44,77 @@
     {#if current_state === 0 }
         <Slides script={section_script} ondone={goForward}></Slides>
     {:else if current_state === 1}
-        <div>
+        <div class="answers">
+            <p>
+                Now let's write them down!. You only have to write three this time! But be SPECIFIC. The more detail
+                you add, the better. Let's start with {partner2.name} this time!
+            </p>
 
+            {#each [0, 1, 2] as i}
+                <input type="text" bind:value={partner2_answers[i]}/>
+            {/each}
+            <button disabled={!allFilled(partner2_answers)} onclick={goForward}>
+                Ready to pass to {partner1.name}?
+            </button>
         </div>
+
+    {:else if current_state === 2}
+        <div class="answers">
+            <p>
+                Now let's write them down!. You only have to write three this time! But be SPECIFIC. The more detail
+                you add, the better.
+            </p>
+
+            {#each [0, 1, 2] as i}
+                <input type="text" bind:value={partner1_answers[i]}/>
+            {/each}
+            <button disabled={!allFilled(partner1_answers)} onclick={goForward}>
+                Ready to compare with {partner2.name}?
+            </button>
+        </div>
+
+    {:else if current_state === 3}
+        <div class="comparison">
+            <div>
+                <h3>{partner1.name}</h3>
+                <ol>
+                    {#each partner1_answers as answer}
+                        <li>{answer}</li>
+                    {/each}
+                </ol>
+            </div>
+            <div>
+                <h3>{partner2.name}</h3>
+                <ol>
+                    {#each partner2_answers as answer}
+                        <li>{answer}</li>
+                    {/each}
+                </ol>
+            </div>
+        </div>
+        <p>
+            What do you guys see? Talk through each of these scenarios, explaining them to each other.
+            Did you realize that these were wants or desires from each other before this? Now we can start thinking
+            about how to make your money work towards these moments that you want most.
+        </p>
+        <button onclick={() => onsubmit(partner1_answers, partner2_answers)}>Next Section</button>
     {/if}
 </div>
+
+
+<style>
+    .answers {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .answers button {
+        align-self: flex-start;
+    }
+
+    .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+</style>
